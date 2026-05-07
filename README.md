@@ -21,6 +21,7 @@ Travel Decision Engine aims to provide a more structured way to model trips, exp
 - Automatically calculate total trip cost and cost per person
 - Recalculate costs dynamically when trip duration changes
 - Model optional costs such as activities, transport, or trip extensions
+- Support custom cost contribution splits between travellers
 
 ### Trip Variant Engine
 - Generate and compare variants of the same trip
@@ -32,22 +33,22 @@ Travel Decision Engine aims to provide a more structured way to model trips, exp
 
 ### Comparison & Decision Support
 - Compare completely different holiday options
-- Evaluate trips using configurable comparison logic
+- - Evaluate trips based on trip type and travel priorities
 - Analyse factors such as:
   - value for money
   - travel complexity
   - trip duration
-  - hiking suitability
+  - activity suitability
   - accommodation quality
-- Generate recommendation summaries and trade-off insights
+- Generate simple recommendation summaries and trade-off insights
 
 ## 🛠 Planned Tech Stack
 
 - Python 3
 - FastAPI - REST API framework
-- SQLModel - Database models and ORM layer
+- SQLModel - Database modelling
 - SQLite - Initial database solution
-- Pydantic - Data validation and schemas
+- Pydantic - Data validation
 - Pytest - Testing framework
 - GitHub Actions - Continuous Integration (CI)
 - Codecov - Test coverage reporting
@@ -60,12 +61,12 @@ The first version of the project will focus on building a working backend for cr
 V1 will include:
 
 - Create and retrieve trip ideas
-- Store basic trip details such as destination, duration, people count, and annual leave usage
-- Add cost items to trips using different cost types
+- Store trip details such as destination, duration, traveller count, and annual leave usage
+- Add cost items using different cost types
 - Calculate total trip cost and cost per person
-- Create simple trip variants by changing duration or optional costs
-- Compare multiple trip options using core metrics
-- Provide structured API responses through FastAPI
+- Generate simple trip variants by changing duration or optional costs
+- Compare multiple trip options using core travel metrics
+- Return structured API responses through FastAPI
 
 V1 will intentionally keep the scope focused on backend logic and API design rather than frontend features or external integrations.
 
