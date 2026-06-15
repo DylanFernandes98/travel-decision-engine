@@ -5,3 +5,5 @@ class TripCreate(BaseModel):
     duration_days: int
     people_count: int
     annual_leave_days: int
+class TripResponse(TripCreate):
+    id: int

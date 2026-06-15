@@ -1,5 +1,5 @@
 from app.schemas.trip import TripCreate
-
+from fastapi import HTTPException
 trips = []                              # Create a temp empty list
 current_trip_id = 0                     # Counter for trip_id
 
@@ -12,6 +12,7 @@ def get_trip_id(trip_id: int):
         # Return matching trip
         if trip["id"] == trip_id:
             return trip
+    raise HTTPException(status_code=404, detail=f"Trip with ID: {trip_id} not found")
 
 def create_trip(trip: TripCreate):
     global current_trip_id
