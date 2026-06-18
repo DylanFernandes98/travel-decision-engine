@@ -19,3 +19,8 @@ async def get_trip_id(trip_id: int):
 # POST endpoint to create a new trip
 async def create_trip(trip: TripCreate):
     return trip_service.create_trip(trip)
+
+@router.delete("/trips/{trip_id}", response_model=TripResponse)
+# DELETE endpoint to delete a specific trip by ID
+async def delete_trip_by_id(trip_id: int):
+    return trip_service.delete_trip(trip_id)
