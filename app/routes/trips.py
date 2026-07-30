@@ -1,26 +1,29 @@
-from fastapi import APIRouter
+from typing import Annotated
+from fastapi import APIRouter, Depends
+from sqlmodel import Session
+from app.core.database import get_session
 from app.schemas.trip import TripCreate, TripResponse
 from app.services import trip_service
 
-router = APIRouter()
 # Creates a router object to group related endpoints
+router = APIRouter()
 
-@router.get("/trips", response_model=list[TripResponse])
 # GET endpoint to retrieve all trips
+@router.get("/trips", response_model=list[TripResponse])
 async def get_trips():
     return trip_service.get_trips()
 
-@router.get("/trips/{trip_id}", response_model=TripResponse)
 # GET endpoint to retrieve a specific trip by ID
+@router.get("/trips/{trip_id}", response_model=TripResponse)
 async def get_trip_id(trip_id: int):
     return trip_service.get_trip_id(trip_id)
     
-@router.post("/trips", response_model=TripResponse)
 # POST endpoint to create a new trip
-async def create_trip(trip: TripCreate):
-    return trip_service.create_trip(trip)
+@router.post("/trips", response_model=TripResponse)
+async def create_trip(trip: TripCreate, session: Annotated[Session, Depends(get_session)]):
+    return trip_service.create_trip(trip, session)
 
-@router.delete("/trips/{trip_id}", response_model=TripResponse)
 # DELETE endpoint to delete a specific trip by ID
+@router.delete("/trips/{trip_id}", response_model=TripResponse)
 async def delete_trip_by_id(trip_id: int):
     return trip_service.delete_trip(trip_id)

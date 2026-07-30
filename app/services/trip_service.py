@@ -1,5 +1,8 @@
+from sqlmodel import Session
+from app.models.trip import Trip
 from app.schemas.trip import TripCreate
 from fastapi import HTTPException
+
 trips = []                              # Create a temp empty list
 current_trip_id = 0                     # Counter for trip_id
 
@@ -14,17 +17,15 @@ def get_trip_id(trip_id: int):
             return trip
     raise HTTPException(status_code=404, detail=f"Trip with ID: {trip_id} not found")
 
-def create_trip(trip: TripCreate):
-    global current_trip_id
-    
-    current_trip_id += 1                # Increment trip id for new trip 
-    
-    trip_data = trip.model_dump()       # Convert Pydantic model into a dictionary
-    trip_data["id"] = current_trip_id   # Assign a unique ID to the trip
-    
-    trips.append(trip_data)             # Add to the temp list
-    
-    return trip_data
+def create_trip(trip_data: TripCreate, session: Session) -> Trip:
+    # Convert the validated API schema into a database model
+    trip = Trip.model_validate(trip_data)
+
+    session.add(trip)                   # Add new trip to current database session
+    session.commit()                    # Save the new row to SQLite
+    session.refresh(trip)               # Reload the trip from the database (retrive ID)
+
+    return trip
 
 def delete_trip(trip_id: int):
     # Find and remove a trip by ID

@@ -2,12 +2,12 @@ import pytest
 from fastapi.testclient import TestClient
 from app.main import app
 
-client = TestClient(app)
 # Creates a test client for making requests to the API
+client = TestClient(app)
 
 @pytest.fixture
+# Reusable test data shared across multiple tests
 def sample_trip_data():
-    # Reusable test data shared across multiple tests
     return {
         "destination": "Thailand", 
         "duration_days": 14,
