@@ -1,21 +1,24 @@
-from sqlmodel import Session
+from sqlmodel import Session, select
 from app.models.trip import Trip
 from app.schemas.trip import TripCreate
 from fastapi import HTTPException
 
-trips = []                              # Create a temp empty list
-current_trip_id = 0                     # Counter for trip_id
+def get_trips(session: Session):
+    # Build a query that selects every Trip from the database
+    statement = select(Trip)
+    # Execute the query and return all matching rows
+    trips = session.exec(statement).all()
 
-def get_trips():
     return trips
 
-def get_trip_id(trip_id: int):
-    # Loop through all stored trips
-    for trip in trips:
-        # Return matching trip
-        if trip["id"] == trip_id:
-            return trip
-    raise HTTPException(status_code=404, detail=f"Trip with ID: {trip_id} not found")
+def get_trip_id(trip_id: int, session: Session):
+    # Look up Trip using its primary key
+    trip = session.get(Trip, trip_id)
+
+    if trip is None:
+        raise HTTPException(status_code=404, detail="Trip not found")
+
+    return trip
 
 def create_trip(trip_data: TripCreate, session: Session) -> Trip:
     # Convert the validated API schema into a database model
@@ -27,11 +30,14 @@ def create_trip(trip_data: TripCreate, session: Session) -> Trip:
 
     return trip
 
-def delete_trip(trip_id: int):
-    # Find and remove a trip by ID
-    for trip in trips:
-        if trip["id"] == trip_id:
-            deleted_trip = trip
-            trips.remove(trip)
-            return deleted_trip
-    raise HTTPException(status_code=404, detail=f"Trip with ID: {trip_id} not found")
+def delete_trip(trip_id: int, session: Session):
+    # Look up Trip by its primary key
+    trip = session.get(Trip, trip_id)
+
+    if trip is None:
+        raise HTTPException(status_code=404, detail="Trip not found")
+
+    session.delete(trip)                # Mark the trip for deletion
+    session.commit()                    # Perm remove from database
+
+    return trip

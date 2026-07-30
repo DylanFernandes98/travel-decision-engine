@@ -2,6 +2,9 @@ import pytest
 from fastapi.testclient import TestClient
 from app.main import app
 
+from sqlmodel import SQLModel
+from app.core.database import engine
+
 # Creates a test client for making requests to the API
 client = TestClient(app)
 
@@ -14,6 +17,15 @@ def sample_trip_data():
         "people_count": 2,
         "annual_leave_days": 10,
     }
+
+@pytest.fixture(autouse=True)
+# Reset the database before every test 
+# autouse=True lets the fixture be used in any test without needing to pass in as a parameter
+def reset_database():
+    SQLModel.metadata.drop_all(engine)
+    SQLModel.metadata.create_all(engine)
+
+    yield
 
 def test_get_trips():
     get_response = client.get("/trips")         # Send a GET request to /trips endpoint
@@ -82,4 +94,4 @@ def test_deleted_trip_returns_404(sample_trip_data):
     get_response = client.get(f"/trips/{trip_id}")
 
     assert get_response.status_code == 404
-    assert get_response.json()["detail"] == f"Trip with ID: {trip_id} not found"
+    assert get_response.json()["detail"] == "Trip not found"
