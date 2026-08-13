@@ -1,3 +1,5 @@
+"""Configures the database engine, table creation, and database sessions."""
+
 from collections.abc import Generator
 from sqlmodel import Session, SQLModel, create_engine
 

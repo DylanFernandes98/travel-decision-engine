@@ -1,3 +1,5 @@
+"""Defines the SQLModel database model for stored trips."""
+
 from sqlmodel import Field, SQLModel
 
 # SQLModel database model

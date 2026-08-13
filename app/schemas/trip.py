@@ -1,3 +1,5 @@
+"""Defines Pydantic schemas for validating trip API data."""
+
 from pydantic import BaseModel
 
 # Base schema for validating trip data sent to the API
@@ -13,3 +15,10 @@ class TripCreate(BaseModel):
 # Inherits all fields from TripCreate and adds the generated database ID
 class TripResponse(TripCreate):
     id: int
+
+# Schema for partially updating existing trip data
+class TripUpdate(BaseModel):
+    destination: str | None = None      # Destination can contain str or None; defaults to None
+    duration_days: int | None = None
+    people_count: int | None = None
+    annual_leave_days: int | None = None

@@ -1,8 +1,10 @@
+"""Defines the FastAPI endpoints for trip operations."""
+
 from typing import Annotated
 from fastapi import APIRouter, Depends
 from sqlmodel import Session
 from app.core.database import get_session
-from app.schemas.trip import TripCreate, TripResponse
+from app.schemas.trip import TripCreate, TripResponse, TripUpdate
 from app.services import trip_service
 
 # Creates a router object to group related endpoints
@@ -22,6 +24,11 @@ async def get_trip_id(trip_id: int, session: Annotated[Session, Depends(get_sess
 @router.post("/trips", response_model=TripResponse)
 async def create_trip(trip: TripCreate, session: Annotated[Session, Depends(get_session)]):
     return trip_service.create_trip(trip, session)
+
+# PATCH endpoint to update a trip
+@router.patch("/trips/{trip_id}", response_model=TripResponse)
+async def update_trip(trip_id: int, trip: TripUpdate, session: Annotated[Session, Depends(get_session)]):
+    return trip_service.update_trip(trip_id, trip, session)
 
 # DELETE endpoint to delete a specific trip by ID
 @router.delete("/trips/{trip_id}", response_model=TripResponse)

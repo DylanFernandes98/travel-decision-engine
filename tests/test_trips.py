@@ -1,3 +1,5 @@
+"""Tests the trip API endpoints and their expected behaviour."""
+
 import pytest
 from fastapi.testclient import TestClient
 from app.main import app
@@ -65,6 +67,29 @@ def test_get_trip_id(sample_trip_data):
     assert response_json["people_count"] == 2
     assert response_json["annual_leave_days"] == 10
     assert response_json["id"] == trip_id
+
+def test_update_trip(sample_trip_data):
+    create_response = client.post("/trips", json=sample_trip_data)
+
+    trip_id = create_response.json()["id"]
+
+    update_response = client.patch(f"/trips/{trip_id}", json={"duration_days": 21})
+
+    assert update_response.status_code == 200
+
+    update_json = update_response.json()
+
+    assert update_json["destination"] == "Thailand"
+    assert update_json["duration_days"] == 21
+    assert update_json["people_count"] == 2
+    assert update_json["annual_leave_days"] == 10
+    assert update_json["id"] == trip_id
+
+def test_update_trip_returns_404():
+    update_response = client.patch("/trips/999", json={"duration_days": 21})
+
+    assert update_response.status_code == 404
+    assert update_response.json()["detail"] == "Trip not found"
 
 def test_delete_trip(sample_trip_data):
     create_response = client.post("/trips", json=sample_trip_data)

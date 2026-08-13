@@ -1,3 +1,5 @@
+"""Creates and configures the FastAPI application."""
+
 from fastapi import FastAPI
 # Imports the router from the trips module
 from app.routes.trips import router
