@@ -1,80 +1,73 @@
 # Travel Decision Engine
 
-A FastAPI backend for modelling travel plans, generating trip variants, and evaluating holidays using dynamic cost calculations and trip comparisons.
+A FastAPI backend for modelling potential trips, calculating travel costs under different assumptions, creating alternative scenarios, and comparing the financial trade-offs between travel options.
 
 ## 🚀 Project Vision
 
 Travel planning information is often scattered across notes apps, spreadsheets, booking websites, and calculators.
 
-Travel Decision Engine aims to provide a more structured way to model trips, explore variants, and evaluate travel trade-offs such as cost, duration, optional activities, and annual leave usage.
+Travel Decision Engine provides a structured way to model potential trips and understand the financial consequences of different choices. Users provide assumptions such as trip duration, traveller count, and estimated costs, while the engine calculates and compares the resulting trade-offs - leaving the final decision to the user.
 
 ## ✨ Planned Features
 
 ### Trip Modelling
-- Create and manage trip ideas
-- Store destinations, trip duration, people count, and annual leave usage
-- Support trip presets such as `hiking_trip`, `short_break`, and `bucket_list`
-- Add notes and optional activities to trips
+
+* Create and manage trip ideas
+* Store destination, trip duration, and traveller count
 
 ### Dynamic Cost Engine
-- Support fixed, per-day, and per-person cost types
-- Automatically calculate total trip cost and cost per person
-- Recalculate costs dynamically when trip duration changes
-- Model optional costs such as activities, transport, or trip extensions
-- Support custom cost contribution splits between travellers
 
-### Trip Variant Engine
-- Generate and compare variants of the same trip
-- Compare combinations such as:
-  - Monza + Switzerland
-  - Switzerland only
-  - Extended trip durations
-- Include or remove optional trip legs and activities
+* Add costs using one-off, per-day, and per-night pricing
+* Support shared and per-person costs
+* Calculate total, per-person, category, and individual cost breakdowns
+
+### Scenarios
+
+* Create alternative versions of a trip using lightweight overrides
+* Change trip duration, traveller count, or exclude selected costs
 
 ### Comparison & Decision Support
-- Compare completely different holiday options
-- - Evaluate trips based on trip type and travel priorities
-- Analyse factors such as:
-  - value for money
-  - travel complexity
-  - trip duration
-  - activity suitability
-  - accommodation quality
-- Generate simple recommendation summaries and trade-off insights
 
-## 🛠 Planned Tech Stack
+* Compare scenarios and different trip options
+* Show differences in duration, total cost, per-person cost, and cost categories
+* Generate factual trade-off insights without subjective recommendations
 
-- Python 3
-- FastAPI - REST API framework
-- SQLModel - Database modelling
-- SQLite - Initial database solution
-- Pydantic - Data validation
-- Pytest - Testing framework
-- GitHub Actions - Continuous Integration (CI)
-- Codecov - Test coverage reporting
-- Mypy - Static type checking
+## 🛠 Tech Stack
+
+* Python 3.11
+* FastAPI - REST API framework
+* SQLModel - Database modelling
+* SQLite - Database
+* Pydantic - Data validation
+* Pytest - Testing framework
+* GitHub Actions - Continuous Integration (CI)
+* Codecov - Test coverage reporting
+* Mypy - Static type checking
 
 ## 🎯 V1 Scope
 
-The first version of the project will focus on building a working backend for creating trip ideas, modelling costs, and comparing travel options.
+V1 focuses on building a working backend for modelling trips, calculating costs, creating alternative scenarios, and comparing travel options.
 
 V1 will include:
 
-- Create and retrieve trip ideas
-- Store trip details such as destination, duration, traveller count, and annual leave usage
-- Add cost items using different cost types
-- Calculate total trip cost and cost per person
-- Generate simple trip variants by changing duration or optional costs
-- Compare multiple trip options using core travel metrics
-- Return structured API responses through FastAPI
+* Trip and cost item management
+* Dynamic cost calculations and breakdowns
+* Lightweight trip scenarios using overrides
+* Side-by-side comparison of evaluated options
+* Factual insights highlighting key trade-offs
+* Structured API responses through FastAPI
 
-V1 will intentionally keep the scope focused on backend logic and API design rather than frontend features or external integrations.
+V1 will intentionally remain focused on backend logic and API design rather than frontend features or external integrations.
 
-## ❌ Out of Scope (Initially)
+## ✅ Current Status
 
-- Flight or accommodation scraping
-- Live pricing integrations
-- Frontend applications
-- User authentication
-- AI-generated itineraries
-- External booking integrations
+The core FastAPI foundation is complete, including:
+
+* Full Trip CRUD API
+* SQLModel and SQLite persistence
+* Pydantic validation and 404 handling
+* Isolated database testing with Pytest
+* Modular models, schemas, services, routes, and tests
+* GitHub Actions CI
+
+Development is now moving into the V1 decision-engine features, starting with the updated Trip model and CostItem system.
