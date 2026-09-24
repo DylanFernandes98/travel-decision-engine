@@ -16,8 +16,8 @@ def sample_trip_data():
     return {
         "destination": "Thailand", 
         "duration_days": 14,
+        "duration_nights": 13,
         "people_count": 2,
-        "annual_leave_days": 10,
     }
 
 @pytest.fixture(autouse=True)
@@ -46,8 +46,8 @@ def test_create_trip(sample_trip_data):
     # Check trip data was stored correctly
     assert response_json["destination"] == "Thailand"
     assert response_json["duration_days"] == 14
+    assert response_json["duration_nights"] == 13
     assert response_json["people_count"] == 2
-    assert response_json["annual_leave_days"] == 10
     assert response_json["id"] == trip_id   # Check a trip ID was generated
 
 def test_get_trip_id(sample_trip_data):
@@ -64,8 +64,8 @@ def test_get_trip_id(sample_trip_data):
     # Check retrieved trip matches created trip
     assert response_json["destination"] == "Thailand"
     assert response_json["duration_days"] == 14
+    assert response_json["duration_nights"] == 13
     assert response_json["people_count"] == 2
-    assert response_json["annual_leave_days"] == 10
     assert response_json["id"] == trip_id
 
 def test_update_trip(sample_trip_data):
@@ -81,8 +81,8 @@ def test_update_trip(sample_trip_data):
 
     assert update_json["destination"] == "Thailand"
     assert update_json["duration_days"] == 21
+    assert update_json["duration_nights"] == 13
     assert update_json["people_count"] == 2
-    assert update_json["annual_leave_days"] == 10
     assert update_json["id"] == trip_id
 
 def test_update_trip_returns_404():
@@ -105,8 +105,8 @@ def test_delete_trip(sample_trip_data):
     # Check retrieved trip matches created trip
     assert response_json["destination"] == "Thailand"
     assert response_json["duration_days"] == 14
+    assert response_json["duration_nights"] == 13
     assert response_json["people_count"] == 2
-    assert response_json["annual_leave_days"] == 10
     assert response_json["id"] == trip_id
 
 def test_deleted_trip_returns_404(sample_trip_data):
@@ -120,3 +120,10 @@ def test_deleted_trip_returns_404(sample_trip_data):
 
     assert get_response.status_code == 404
     assert get_response.json()["detail"] == "Trip not found"
+
+def test_create_trip_rejects_more_than_two_people(sample_trip_data):
+    sample_trip_data["people_count"] = 3
+    
+    create_response = client.post("/trips", json=sample_trip_data) # Create a new trip
+
+    assert create_response.status_code == 422
