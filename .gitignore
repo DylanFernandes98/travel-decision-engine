@@ -220,4 +220,7 @@ __marimo__/
 # macOS
 .DS_Store
 
-.vscodetravel.db
+# Local development files
+.python-version
+travel.db
+.vscode/
