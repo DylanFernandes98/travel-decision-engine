@@ -10,6 +10,15 @@ from app.core.database import engine
 # Creates a test client for making requests to the API
 client = TestClient(app)
 
+@pytest.fixture(autouse=True)
+# Reset the database before every test 
+# autouse=True lets the fixture be used in any test without needing to pass in as a parameter
+def reset_database():
+    SQLModel.metadata.drop_all(engine)
+    SQLModel.metadata.create_all(engine)
+
+    yield
+
 @pytest.fixture
 # Reusable test data shared across multiple tests
 def sample_trip_data():
@@ -19,15 +28,6 @@ def sample_trip_data():
         "duration_nights": 13,
         "people_count": 2,
     }
-
-@pytest.fixture(autouse=True)
-# Reset the database before every test 
-# autouse=True lets the fixture be used in any test without needing to pass in as a parameter
-def reset_database():
-    SQLModel.metadata.drop_all(engine)
-    SQLModel.metadata.create_all(engine)
-
-    yield
 
 def test_get_trips():
     get_response = client.get("/trips")         # Send a GET request to /trips endpoint
