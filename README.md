@@ -8,7 +8,7 @@ Travel planning information is often scattered across notes apps, spreadsheets, 
 
 Travel Decision Engine provides a structured way to model potential trips and understand the financial consequences of different choices. Users provide assumptions such as trip duration, traveller count, and estimated costs, while the engine calculates and compares the resulting trade-offs - leaving the final decision to the user.
 
-## ✨ Planned Features
+## ✨ Features & Roadmap
 
 ### Trip Modelling
 
@@ -55,7 +55,7 @@ V1 will include:
 * Factual insights highlighting key trade-offs
 * Structured API responses through FastAPI
 
-V1 will intentionally remain focused on backend logic and API design rather than frontend features or external integrations.
+V1 will prioritise backend logic and API design, with a lightweight frontend potentially added to demonstrate and interact with the decision engine.
 
 ## ✅ Current Status
 
