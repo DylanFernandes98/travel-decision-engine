@@ -61,14 +61,14 @@ V1 will intentionally remain focused on backend logic and API design rather than
 
 The core FastAPI foundation is complete, including:
 
-* Full Trip CRUD API
-* SQLModel and SQLite persistence
-* Pydantic validation and 404 handling
-* Isolated database testing with Pytest
+* Full Trip and CostItem CRUD APIs
+* SQLModel and SQLite persistence with relational database models
+* Pydantic validation and HTTP error handling
+* Automated API testing with Pytest
 * Modular models, schemas, services, routes, and tests
 * GitHub Actions CI
 
-Development is now moving into the V1 decision-engine features, starting with the updated Trip model and CostItem system.
+Development is now moving into the V1 decision-engine features, starting with the dynamic cost calculation engine, followed by trip scenarios and comparison functionality.
 
 ## ⚙️ Getting Started
 
