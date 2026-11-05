@@ -1,6 +1,6 @@
 # Travel Decision Engine
 
-A FastAPI backend for modelling potential trips, calculating travel costs under different assumptions, creating alternative scenarios, and comparing the financial trade-offs between travel options.
+A FastAPI-based travel planning application designed to model trips, calculate costs under different assumptions, and compare the financial trade-offs between travel options.
 
 ## 🚀 Project Vision
 
@@ -22,6 +22,10 @@ Travel Decision Engine provides a structured way to model potential trips and un
 * Scenarios - Create alternative trip versions by adjusting duration, traveller count, or included costs
 * Comparison & Decision Support - Compare travel options and highlight factual financial trade-offs without subjective recommendations
 
+## 📖 API Preview
+
+![Travel Decision Engine API](docs/swagger.png)
+
 ## 🛠 Tech Stack
 
 * Python 3.11
@@ -42,19 +46,6 @@ To keep the initial release focused, V1 intentionally excludes:
 * User authentication and account management
 * AI-generated itineraries and subjective travel recommendations
 * Complex group travel and destination data integrations
-
-## ✅ Current Status
-
-The core FastAPI foundation is complete, including:
-
-* Full Trip and CostItem CRUD APIs
-* SQLModel and SQLite persistence with relational database models
-* Pydantic validation and HTTP error handling
-* Automated API testing with Pytest
-* Modular models, schemas, services, routes, and tests
-* GitHub Actions CI
-
-Development is now moving into the V1 decision-engine features, starting with the dynamic cost calculation engine, followed by trip scenarios and comparison functionality.
 
 ## ⚙️ Getting Started
 
