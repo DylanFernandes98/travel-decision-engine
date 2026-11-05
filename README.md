@@ -21,6 +21,7 @@ Travel Decision Engine provides a structured way to model potential trips and un
 * Dynamic Cost Engine - Calculate total, per-person, category, and individual cost breakdowns
 * Scenarios - Create alternative trip versions by adjusting duration, traveller count, or included costs
 * Comparison & Decision Support - Compare travel options and highlight factual financial trade-offs without subjective recommendations
+* Lightweight Frontend - Provide a simple interface for creating trips, managing costs, and comparing travel options
 
 ## 📖 API Preview
 
