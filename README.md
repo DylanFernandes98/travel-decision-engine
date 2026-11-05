@@ -24,7 +24,7 @@ Travel Decision Engine provides a structured way to model potential trips and un
 
 ## 📖 API Preview
 
-![Travel Decision Engine API](docs/swagger.png)
+![Travel Decision Engine API](swagger.png)
 
 ## 🛠 Tech Stack
 
