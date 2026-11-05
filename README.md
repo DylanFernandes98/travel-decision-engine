@@ -41,8 +41,6 @@ Travel Decision Engine provides a structured way to model potential trips and un
 * Pydantic - Data validation
 * Pytest - Testing framework
 * GitHub Actions - Continuous Integration (CI)
-* Codecov - Test coverage reporting
-* Mypy - Static type checking
 
 ## 🎯 V1 Scope
 
@@ -71,3 +69,30 @@ The core FastAPI foundation is complete, including:
 * GitHub Actions CI
 
 Development is now moving into the V1 decision-engine features, starting with the updated Trip model and CostItem system.
+
+## ⚙️ Getting Started
+
+**Clone the repository**
+```bash
+git clone https://github.com/DylanFernandes98/travel-decision-engine.git
+cd travel-decision-engine
+```
+**Create and activate a virtual environment**
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+```
+**Install dependencies**
+```bash
+pip install -r requirements.txt
+```
+**Run the API**
+```bash
+uvicorn app.main:app --reload
+```
+Open `http://127.0.0.1:8000/docs` to explore the API through FastAPI's interactive Swagger documentation.
+
+**Run the tests**
+```bash
+python -m pytest
+```
