@@ -10,27 +10,17 @@ Travel Decision Engine provides a structured way to model potential trips and un
 
 ## ✨ Features & Roadmap
 
-### Trip Modelling
+### Implemented
 
-* Create and manage trip ideas
-* Store destination, trip duration, and traveller count
+* Trip Modelling - Create and manage trips with destination, duration, and traveller count
+* Cost Item Management - Add and manage one-off, per-day, and per-night costs, with shared and per-person pricing
+* Backend Foundation - SQLModel and SQLite persistence, Pydantic validation, automated Pytest testing, and GitHub Actions CI
 
-### Dynamic Cost Engine
+### Planned
 
-* Add costs using one-off, per-day, and per-night pricing
-* Support shared and per-person costs
-* Calculate total, per-person, category, and individual cost breakdowns
-
-### Scenarios
-
-* Create alternative versions of a trip using lightweight overrides
-* Change trip duration, traveller count, or exclude selected costs
-
-### Comparison & Decision Support
-
-* Compare scenarios and different trip options
-* Show differences in duration, total cost, per-person cost, and cost categories
-* Generate factual trade-off insights without subjective recommendations
+* Dynamic Cost Engine - Calculate total, per-person, category, and individual cost breakdowns
+* Scenarios - Create alternative trip versions by adjusting duration, traveller count, or included costs
+* Comparison & Decision Support - Compare travel options and highlight factual financial trade-offs without subjective recommendations
 
 ## 🛠 Tech Stack
 
@@ -44,18 +34,14 @@ Travel Decision Engine provides a structured way to model potential trips and un
 
 ## 🎯 V1 Scope
 
-V1 focuses on building a working backend for modelling trips, calculating costs, creating alternative scenarios, and comparing travel options.
+V1 focuses on building a working travel decision engine, prioritising backend logic, cost calculations, and structured API design, supported by a lightweight frontend for interacting with the application.
 
-V1 will include:
+To keep the initial release focused, V1 intentionally excludes:
 
-* Trip and cost item management
-* Dynamic cost calculations and breakdowns
-* Lightweight trip scenarios using overrides
-* Side-by-side comparison of evaluated options
-* Factual insights highlighting key trade-offs
-* Structured API responses through FastAPI
-
-V1 will prioritise backend logic and API design, with a lightweight frontend potentially added to demonstrate and interact with the decision engine.
+* Live travel pricing, web scraping, and external booking integrations
+* User authentication and account management
+* AI-generated itineraries and subjective travel recommendations
+* Complex group travel and destination data integrations
 
 ## ✅ Current Status
 
