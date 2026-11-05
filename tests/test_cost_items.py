@@ -138,17 +138,17 @@ def test_delete_cost_items(sample_trip_id, sample_cost_item_data):
     assert get_response.status_code == 404
     assert get_response.json()["detail"] == "Cost Item not found"
 
-def test_deleted_trip_returns_404(sample_trip_id, sample_cost_item_data):
+def test_deleted_cost_item_returns_404(sample_trip_id, sample_cost_item_data):
     create_response = client.post(f"/trips/{sample_trip_id}/cost-items", json=sample_cost_item_data)
 
     cost_id = create_response.json()["id"]
 
     delete_response = client.delete(f"/trips/{sample_trip_id}/cost-items/{cost_id}")
 
-    get_response = client.get(f"/trips/{sample_trip_id}/cost-items{cost_id}")
+    get_response = client.get(f"/trips/{sample_trip_id}/cost-items/{cost_id}")
 
     assert get_response.status_code == 404
-    assert get_response.json()["detail"] == "Not Found"
+    assert get_response.json()["detail"] == "Cost Item not found"
 
 def test_create_cost_item_rejects_negative_cost(sample_trip_id, sample_cost_item_data):
     sample_cost_item_data["unit_cost"] = "-50.00"

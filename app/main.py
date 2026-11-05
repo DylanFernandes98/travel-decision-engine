@@ -7,7 +7,10 @@ from app.routes.cost_items import router as cost_items_router
 # Imports the database
 from app.core.database import create_db_and_tables
 
-app = FastAPI(title="Travel Decision Engine")
+app = FastAPI(
+    title="Travel Decision Engine",
+    description="A REST API for creating trips and managing travel costs, forming the foundation of a travel decision engine.",
+)
 
 # Creates any missing tables
 create_db_and_tables()
@@ -17,7 +20,7 @@ app.include_router(trips_router)
 app.include_router(cost_items_router)
 
 # Defines a GET endpoint for the root URL (/)
-@app.get("/")
+@app.get("/", include_in_schema=False)
 def root():
     return {
         "message": "Travel Decision Engine API"
